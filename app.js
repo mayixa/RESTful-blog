@@ -13,7 +13,7 @@ db.once('open', function() {
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
 
 const blogSchema = new mongoose.Schema({
     title: String,
@@ -22,6 +22,8 @@ const blogSchema = new mongoose.Schema({
     created: {type: Date, default: Date.now}
 });
 
+const Blog = mongoose.model('Blog', blogSchema)
+
 app.listen(3000, () => {
-    console.log("Blog Server Started");
+    console.log('Blog Server Started');
 });
