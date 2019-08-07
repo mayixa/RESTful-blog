@@ -40,6 +40,10 @@ app.get('/blogs', (req, res) => {
     });
 });
 
+app.get('/blogs/new', (req, res) => {
+    res.render('new');
+});
+
 // localhost
 app.listen(3000, () => {
     console.log('Blog Server Started');
