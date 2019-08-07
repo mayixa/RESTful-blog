@@ -26,10 +26,21 @@ const blogSchema = new mongoose.Schema({
 const blog = mongoose.model('blog', blogSchema)
 
 // restful routes
-app.get('/blogs', (req, res) => {
-    res.render("index");
+app.get('/', (req, res) => {
+    res.redirect('/blogs');
 });
 
+app.get('/blogs', (req, res) => {
+    blog.find({}, (err, blogs) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('index', {blogs: blogs});
+        };
+    });
+});
+
+// localhost
 app.listen(3000, () => {
     console.log('Blog Server Started');
 });
