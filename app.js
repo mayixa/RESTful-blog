@@ -2,7 +2,7 @@ const express = require('express');
       app = express();
       bodyParser = require('body-parser');
       mongoose = require('mongoose');
-      methodOverrid = require('method-override')
+      methodOverride = require('method-override')
 
 mongoose.connect('mongodb+srv://Mayixa:flingan95@mayixa-avcru.azure.mongodb.net/blog?retryWrites=true&w=majority', {useNewUrlParser: true});
 
@@ -14,6 +14,7 @@ db.once('open', () => {
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
+app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 
 // mongoose config
