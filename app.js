@@ -74,6 +74,9 @@ app.get('/blogs/:id/edit', (req, res) => {
     });
 });
 
+app.put('/blogs/:id', (req, res) => {
+    res.send('Update route!');
+});
 
 // localhost
 app.listen(3000, () => {
