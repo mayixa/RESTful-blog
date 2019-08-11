@@ -90,7 +90,13 @@ app.post('/blogs/:id', (req, res) => {
 });
 
 app.delete('/blogs/:id', (req, res) => {
-    res.send('DESTROYED');
+    blog.findByIdAndRemove(req.params.id, (err) => {
+        if (err) {
+            res.redirect('/blogs');
+        } else {
+            res.redirect('/blogs');
+        }
+    });
 });
 
 // localhost
