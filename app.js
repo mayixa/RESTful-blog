@@ -12,10 +12,13 @@ db.once('open', () => {
     console.log('Connected to mongoDB!')
 });
 
+mongoose.set('useFindAndModify', false);
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
+
 
 // mongoose config
 const blogSchema = new mongoose.Schema({
@@ -76,8 +79,18 @@ app.get('/blogs/:id/edit', (req, res) => {
     });
 });
 
-app.put('/blogs/:id', (req, res) => {
-    res.send('Update route!');
+app.post('/blogs/:id', (req, res) => {
+    blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, blogUpdated) => {
+        if (err) {
+            res.redirect('/blogs');
+        } else {
+            res.redirect('/blogs/' + req.params.id);
+        };
+    });
+});
+
+app.delete('/blogs/:id', (req, res) => {
+    res.send('DESTROYED');
 });
 
 // localhost
