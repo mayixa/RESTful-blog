@@ -1,7 +1,8 @@
-const express = require("express");
+const express = require('express');
       app = express();
-      bodyParser = require("body-parser");
-      mongoose = require("mongoose");
+      bodyParser = require('body-parser');
+      mongoose = require('mongoose');
+      methodOverrid = require('method-override')
 
 mongoose.connect('mongodb+srv://Mayixa:flingan95@mayixa-avcru.azure.mongodb.net/blog?retryWrites=true&w=majority', {useNewUrlParser: true});
 
