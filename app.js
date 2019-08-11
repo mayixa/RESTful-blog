@@ -2,7 +2,8 @@ const express = require('express');
       app = express();
       bodyParser = require('body-parser');
       mongoose = require('mongoose');
-      methodOverride = require('method-override')
+      methodOverride = require('method-override');
+      expressSanitizer = require('express-sanitizer');
 
 mongoose.connect('mongodb+srv://Mayixa:flingan95@mayixa-avcru.azure.mongodb.net/blog?retryWrites=true&w=majority', {useNewUrlParser: true});
 
@@ -17,6 +18,7 @@ mongoose.set('useFindAndModify', false);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use(methodOverride('_method'));
+app.use(expressSanitizer());
 app.set('view engine', 'ejs');
 
 
@@ -45,10 +47,12 @@ app.get('/blogs', (req, res) => {
     });
 });
 
+// new post form page
 app.get('/blogs/new', (req, res) => {
     res.render('new');
 });
 
+// create post
 app.post('/blogs', (req, res) => {
     blog.create(req.body.blog, (err, newBlog) => {
         if (err) {
