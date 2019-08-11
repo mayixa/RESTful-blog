@@ -64,6 +64,16 @@ app.get('/blogs/:id', (req, res) => {
     });
 });
 
+app.get('/blogs/:id/edit', (req, res) => {
+    blog.findById(req.params.id, (err, blogFound) => {
+        if (err) {
+            res.redirect('/blogs');
+        } else {
+            res.render('edit', {blog: blogFound});
+        };
+    });
+});
+
 
 // localhost
 app.listen(3000, () => {
