@@ -54,6 +54,7 @@ app.get('/blogs/new', (req, res) => {
 
 // create post
 app.post('/blogs', (req, res) => {
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     blog.create(req.body.blog, (err, newBlog) => {
         if (err) {
             res.render('new');
@@ -63,6 +64,7 @@ app.post('/blogs', (req, res) => {
     });
 });
 
+// show full blog post
 app.get('/blogs/:id', (req, res) => {
     blog.findById(req.params.id, (err, blogFound) => {
         if (err) {
@@ -73,6 +75,7 @@ app.get('/blogs/:id', (req, res) => {
     });
 });
 
+// edit route
 app.get('/blogs/:id/edit', (req, res) => {
     blog.findById(req.params.id, (err, blogFound) => {
         if (err) {
@@ -83,7 +86,9 @@ app.get('/blogs/:id/edit', (req, res) => {
     });
 });
 
+// update route
 app.post('/blogs/:id', (req, res) => {
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, blogUpdated) => {
         if (err) {
             res.redirect('/blogs');
