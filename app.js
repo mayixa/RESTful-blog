@@ -44,6 +44,16 @@ app.get('/blogs/new', (req, res) => {
     res.render('new');
 });
 
+app.post('/blogs', (req, res) => {
+    blog.create(req.body.blog, (err, newBlog) => {
+        if (err) {
+            res.render('new');
+        } else {
+            res.redirect('/blogs');
+        };
+    });
+});
+
 // localhost
 app.listen(3000, () => {
     console.log('Blog Server Started');
