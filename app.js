@@ -54,6 +54,17 @@ app.post('/blogs', (req, res) => {
     });
 });
 
+app.get('/blogs/:id', (req, res) => {
+    blog.findById(req.params.id, (err, blogFound) => {
+        if (err) {
+            res.redirect('/blogs');
+        } else {
+            res.render('show', {blog: blogFound});
+        };
+    });
+});
+
+
 // localhost
 app.listen(3000, () => {
     console.log('Blog Server Started');

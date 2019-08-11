@@ -8,6 +8,7 @@
         <span><%= blog.created %></span>
         <img src="<%= blog.image %>" alt="<%= blog.title %>">
         <p><%= blog.body %></p>
+        <a class="ui inverted violet button" href="/blogs/<%= blog._id %>">Show more</a>
     </div>
 <% }); %>
 
